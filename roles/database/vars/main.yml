@@ -1,0 +1,10 @@
+mariadb:
+ - mariadb-server
+ - MySQL-python
+
+db_host:
+ localhost
+db_user:
+ root
+db_pass:
+ root

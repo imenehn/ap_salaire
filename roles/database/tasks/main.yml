@@ -1,0 +1,37 @@
+---
+  - name: "Install mysql"
+    yum:
+      name: "{{item}}"
+      state: present
+    loop:
+      "{{mariadb}}"
+
+  - name: "copy bdd conf template"
+    template:
+     src: "template/bddconf.php.j2"
+     dest: /var/www/html/bddconf.php
+
+  - name: "start mariadb server"
+    systemd:
+      name: mariadb
+      state: started
+      enabled: yes
+
+  - name: "Delete anonymous users"
+    mysql_user:
+      user=""
+      state="absent"
+    ignore_errors: true
+
+  - name: "Set root password"
+    mysql_user:
+      user={{db_user}}
+      password="{{db_pass}}"
+      host=localhost
+    ignore_errors: true
+    
+  - name: "restart mariadb server"
+    systemd:
+      name: mariadb
+      state: restarted
+      enabled: yes

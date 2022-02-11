@@ -1,0 +1,4 @@
+apache_php:
+  - httpd
+  - php
+  - php-mysql

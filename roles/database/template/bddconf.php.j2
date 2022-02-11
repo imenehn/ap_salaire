@@ -1,0 +1,12 @@
+<?php
+   $dbhost = {{db_host}};
+   $dbuser = {{db_user}};
+   $dbpass = {{db_pass}};
+   $conn = mysql_connect($dbhost, $dbuser, $dbpass);
+   
+   if(! $conn ) {
+      die('Could not connect: ' . mysql_error());
+   }
+   
+   echo "Connected successfully\n";
+?>

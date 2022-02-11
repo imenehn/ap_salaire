@@ -1,0 +1,43 @@
+---
+# tasks file for createuser
+
+- name: "Install apache and php"
+  yum:
+   name: "{{item}}"
+   state: present
+  loop:
+   "{{apache_php}}"
+
+- name: "write mode html folder"
+  file:
+   path: /var/www/html
+   state: directory
+   mode: '0755'
+
+- name: "delete default index"
+  file:
+   path: /var/www/html/index.html
+   state: absent
+
+- name: "upload php files"
+  copy:
+   src: files/
+   dest: /var/www/html/
+
+- name: "Restart apache server"
+  service:
+     name: httpd
+     state: restarted
+     enabled: yes
+
+- name: "permit traffic in default zone for https service"
+  firewalld:
+   service: http
+   permanent: yes
+   state: enabled
+
+- name: "restart and enable systemd nginx service"
+  systemd:
+   name: firewalld
+   enabled: yes
+   state: restarted
