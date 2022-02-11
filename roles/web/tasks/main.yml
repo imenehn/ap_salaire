@@ -27,8 +27,8 @@
 - name: "Restart apache server"
   service:
      name: httpd
-     state: enabled
      enabled: yes
+     state: restarted
 
 - name: "permit traffic in default zone for https service"
   firewalld:
