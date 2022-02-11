@@ -8,7 +8,7 @@ node{
         sh "rm -rf /root/.ssh"
         sh "echo '192.168.56.102 app-salaire.imene.form' > /etc/hosts"
         sh "ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa"
-        sh "sshpass -p 'root' ssh-copy-id -o stricthostkeychecking=no root@app-salaire.imene.form"
+        sh "sshpass -p 'Admin.' ssh-copy-id -o stricthostkeychecking=no root@app-salaire.imene.form"
     }
 
     stage('Ansible') {
